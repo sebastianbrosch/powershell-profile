@@ -59,7 +59,7 @@ if (!(Test-Path -Path $ProfilePath)) {
   Import-Module BitsTransfer
 
   foreach ($file in $files) {
-    Start-BitsTransfer -Source $(Join-Path -Path $SourceRoot -ChildPath $file) -Destination $ProfilePath
+    Start-BitsTransfer -Source "$SourceRoot$file" -Destination $(Join-Path -Path $ProfilePath -ChildPath $file)
   }
 } else {
   Write-Host -ForegroundColor Yellow "The PowerShell profile $ProfileName is already installed."
