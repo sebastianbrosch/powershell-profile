@@ -11,7 +11,7 @@ param (
   [Int] $PP_Host = 1
 )
 
-$SourceRoot = 'https://github.com/sebastianbrosch/powershell-profile/blob/main/'
+$SourceRoot = 'https://raw.githubusercontent.com/sebastianbrosch/powershell-profile/refs/heads/main/'
 $ProfilePath = $PROFILE.CurrentUserCurrentHost
 
 switch ("$PP_User$PP_Host") {
