@@ -48,8 +48,9 @@ switch ($ProfilePath) {
   }
 }
 
+$ProfileFolder = Split-Path $ProfilePath
+
 $files = @(
-  "Profile.ps1",
   "Modules/PowerShell.psm1",
   "Modules/Utils.psm1"
 )
@@ -57,9 +58,10 @@ $files = @(
 if (!(Test-Path -Path $ProfilePath)) {
   Write-Host -ForegroundColor Green "Installing the PowerShell profile: $ProfileName"
   Import-Module BitsTransfer
+  Start-BitsTransfer -Source "${SourceRoot}Profile.ps1" -Destination $ProfilePath
 
   foreach ($file in $files) {
-    Start-BitsTransfer -Source "$SourceRoot$file" -Destination $(Join-Path -Path $ProfilePath -ChildPath $file)
+    Start-BitsTransfer -Source "${SourceRoot}${file}" -Destination $(Join-Path -Path $ProfileFolder -ChildPath $file)
   }
 } else {
   Write-Host -ForegroundColor Yellow "The PowerShell profile $ProfileName is already installed."
