@@ -20,10 +20,10 @@ function Get-PublicIP {
   )
 
   process {
-    if ($v6.IsPresent) {
-      (Invoke-WebRequest https://api6.ipify.org).Content
+    if ($v6) {
+      (Invoke-WebRequest -Uri 'https://api6.ipify.org' -SkipHttpErrorCheck).Content
     } else {
-      (Invoke-WebRequest https://api.ipify.org).Content
+      (Invoke-WebRequest -Uri 'https://api.ipify.org' -SkipHttpErrorCheck).Content
     }
   }
 }

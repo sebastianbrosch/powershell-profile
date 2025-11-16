@@ -24,13 +24,14 @@ function Get-MensaMenu {
   $lat = $location.Latitude -Replace ',','.'
   $long = $location.Longitude -Replace ',','.'
   $currentDateTime = (Get-Date -Format 'yyyy-MM-dd')
+  $apiUrl = "https://openmensa.org/api/v2"
 
-  $jsonCampi = (Invoke-WebRequest "https://openmensa.org/api/v2/canteens?near[lat]=$lat&near[lng]=$long&near[dist]=5" -SkipHttpErrorCheck).Content | ConvertFrom-Json
+  $jsonCampi = (Invoke-WebRequest "$apiUrl/canteens?near[lat]=$lat&near[lng]=$long&near[dist]=5" -SkipHttpErrorCheck).Content | ConvertFrom-Json
 
   Clear-Host
 
   foreach ($campus in $jsonCampi) {
-    $jsonMeals = (Invoke-WebRequest "https://openmensa.org/api/v2/canteens/$($campus.id)/days/$($currentDateTime)/meals" -SkipHttpErrorCheck).Content | ConvertFrom-Json
+    $jsonMeals = (Invoke-WebRequest "$apiUrl/canteens/$($campus.id)/days/$($currentDateTime)/meals" -SkipHttpErrorCheck).Content | ConvertFrom-Json
 
     $meals = @()
     $number = 0;
