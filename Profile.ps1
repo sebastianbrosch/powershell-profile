@@ -1,6 +1,7 @@
 function prompt {
-  $currentDateTime = $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
+  $currentDateTime = $(Get-Date -Format 'HH:mm:ss')
   $currentLocation = $(Get-Location).Path
+
   Write-Host "[$($currentDateTime)] $($currentLocation)\>" -NoNewline -ForegroundColor White
   return " "
 }
